@@ -1756,31 +1756,28 @@ class RenderWebGL extends EventEmitter {
 
         return dst;
     }
-    static getColor (vec, drawabl, dst) {
-    //  console.warn("MSG form GetColor");
-    //  console.warn(drawabl);
-    //  console.warn(vec);
-        dst = dst || new Uint8ClampedArray(3);
+   static getColor (vec, drawabl, dst) {
         dst.fill(0);
+        dst = dst || new Uint8ClampedArray(3);
         let blendAlpha = 1;
-            Drawable.sampleColor4b(vec, drawabl, __blendColor);
-      //      console.warn(__blendColor);
-            // if we are fully transparent, go to the next one "down"
-            /*(const sampleAlpha = __blendColor[3] / 255;
-            // premultiply alpha
-            dst[0] += __blendColor[0] * blendAlpha * sampleAlpha;
-            dst[1] += __blendColor[1] * blendAlpha * sampleAlpha;
-            dst[2] += __blendColor[2] * blendAlpha * sampleAlpha;
-            blendAlpha *= (1 - sampleAlpha);
-        // Backdrop could be transparent, so we need to go to the "clear color" of the
-        // draw scene (white) as a fallback if everything was alpha
-        dst[0] += blendAlpha * 255;
-        dst[1] += blendAlpha * 255;
-        dst[2] += blendAlpha * 255;*/
-return __blendColor;
-        //return dst;
+        Drawable.sampleColor4b(vec, drawabl, __blendColor);
+        return __blendColor;
     }
-    /**
+
+    static getDist(vec,draw,rad,col){
+          const ddx = 1.5 * Math.cos(rad);
+          const ddy = 1.5 * Math.sin(rad);
+          const ddc = [];ddc[0]=1;ddc[1]=1;ddc[2]=1;ddc[3]=1;
+          for(let i=0;i<100;i++)
+            {if(colorMatches(RenderWebGL.getColor(vec,draw,ddc),col,0))
+              return i;
+              vec[0]+=ddx;
+              vec[1]+=ddy;
+            }
+              return 100;
+    }
+
+      /*
      * @callback RenderWebGL#snapshotCallback
      * @param {string} dataURI Data URI of the snapshot of the renderer
      */
