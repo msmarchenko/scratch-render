@@ -1768,13 +1768,13 @@ class RenderWebGL extends EventEmitter {
           const ddx = 1.5 * Math.cos(rad);
           const ddy = 1.5 * Math.sin(rad);
           const ddc = [];ddc[0]=1;ddc[1]=1;ddc[2]=1;ddc[3]=1;
-          for(let i=0;i<100;i++)
+          for(let i=0;i<255;i++)
             {if(colorMatches(RenderWebGL.getColor(vec,draw,ddc),col,0))
               return i;
               vec[0]+=ddx;
               vec[1]+=ddy;
             }
-              return 100;
+              return 255;
     }
 
       /*

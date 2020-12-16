@@ -5111,12 +5111,12 @@ var RenderWebGL = function (_EventEmitter) {
             var ddx = 1.5 * Math.cos(rad);
             var ddy = 1.5 * Math.sin(rad);
             var ddc = [];ddc[0] = 1;ddc[1] = 1;ddc[2] = 1;ddc[3] = 1;
-            for (var i = 0; i < 100; i++) {
+            for (var i = 0; i < 255; i++) {
                 if (colorMatches(RenderWebGL.getColor(vec, draw, ddc), col, 0)) return i;
                 vec[0] += ddx;
                 vec[1] += ddy;
             }
-            return 100;
+            return 255;
         }
     }]);
 
